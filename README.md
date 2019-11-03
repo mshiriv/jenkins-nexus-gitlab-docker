@@ -1,47 +1,17 @@
 # Jenkins, Nexus and GitLab docker compose
 
-- [Jenkins, Nexus and GitLab docker compose](#jenkins-nexus-and-gitlab-docker-compose)
-- [Introduction](#introduction)
-- [Contributing](#contributing)
-- [Team](#team)
-- [Services Architecture](#services-architecture)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [References](#references)
+Run the latest version of Jenkins,  Nexus and GitLab with Docker Compose.
 
+It gives you the ability to use GitLab as git repository, Jenkins as CI server and  Nexus to manage binaries and build artifacts across your software supply chain. 
 
-
-
-# Introduction
-
-Dockerfile to build a [GitLab](https://about.gitlab.com/) image for the [Docker](https://www.docker.com/products/docker-engine) opensource container platform.
-
-GitLab CE is set up in the Docker image using the [install from source](https://docs.gitlab.com/ce/install/installation.html) method as documented in the the official GitLab documentation.
-
-For other methods to install GitLab please refer to the [Official GitLab Installation Guide](https://about.gitlab.com/install/) which includes a [GitLab image for Docker](https://docs.gitlab.com/omnibus/docker/).
-
-# Contributing
-
-If you find this image useful here's how you can help:
-
-- Send a Pull Request with your awesome new features and bug fixes
-- Be a part of the community and help resolve [Issues](https://github.com/mahmoudshirivaramini/jenkins-nexus-gitlab-docker/issues)
-
-# Team
-- Mahmoud Shiri Varamini ([mahmoudshirivaramini](https://github.com/mahmoudshirivaramini))
-- Omid Abasi ([omidabc](https://github.com/omidabc))
-
-See [Contributors](../../graphs/contributors) for the complete list developers that have contributed to this project.
+Based on the official Docker images from Jenkins and Nexus :
+* [Jenkins](https://github.com/jenkinsci/docker)
+* [Nexus](https://github.com/sonatype/docker-nexus3)
+* [Nginx](https://github.com/nginxinc/docker-nginx)
+Also Gitlab besed on [Dockerized GitLab](https://github.com/sameersbn/docker-gitlab) :
+* [GitLab](https://github.com/sameersbn/docker-gitlab)
 
 
 # Services Architecture
 ![picture](./services_architecture.jpg)
 
-# Installation
-
-# Quick Start
-
-# Configuration
-
-# References 
