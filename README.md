@@ -8,6 +8,8 @@ Based on the official Docker images from Jenkins and Nexus :
 * [Jenkins](https://github.com/jenkinsci/docker)
 * [Nexus](https://github.com/sonatype/docker-nexus3)
 * [Nginx](https://github.com/nginxinc/docker-nginx)
+
+  
 Also Gitlab besed on [Dockerized GitLab](https://github.com/sameersbn/docker-gitlab) :
 * [GitLab](https://github.com/sameersbn/docker-gitlab)
 
