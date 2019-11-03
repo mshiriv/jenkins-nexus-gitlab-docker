@@ -9,7 +9,7 @@ services:
 
 
   jenkins:
-    image: jenkins.aminsft:latest
+    image: jenkins:latest
     build:
       context: ./
       dockerfile: Dockerfile
@@ -18,6 +18,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - jenkins_data:/var/jenkins_home
     restart: always
+    
 
   nginx:
     image: nginx
@@ -34,8 +35,8 @@ services:
       - nexus
       - gitlab
     restart: always 
-    environment:
-      - HOSTNAME=example.com
+    #environment:
+    #  - HOSTNAME=example.com
 
   redis:
     restart: always
@@ -63,7 +64,7 @@ services:
     - redis
     - postgresql
     ports:
-    #- "10080:80"
+    - "10080:80"
     - "10022:22"
     volumes:
     - gitlab-data:/home/git/data:Z
@@ -86,7 +87,7 @@ services:
     - GITLAB_HTTPS=false
     - SSL_SELF_SIGNED=false
 
-    - GITLAB_HOST=localhost
+    - GITLAB_HOST=gitlab.example.com
     - GITLAB_PORT=10080
     - GITLAB_SSH_PORT=10022
     - GITLAB_RELATIVE_URL_ROOT=
@@ -186,7 +187,6 @@ services:
     - OAUTH_AZURE_API_KEY=
     - OAUTH_AZURE_API_SECRET=
     - OAUTH_AZURE_TENANT_ID=
-
 
 
   # omgwtfssl:
