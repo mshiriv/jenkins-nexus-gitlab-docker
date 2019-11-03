@@ -58,7 +58,7 @@ services:
     - DB_NAME=gitlabhq_production
     - DB_EXTENSION=pg_trgm
 
-    
+
   gitlab:
     restart: always
     image: sameersbn/gitlab:12.4.0
@@ -72,7 +72,6 @@ services:
     - gitlab-data:/home/git/data:Z
     environment:
     - DEBUG=false
-
     - DB_ADAPTER=postgresql
     - DB_HOST=postgresql
     - DB_PORT=5432
