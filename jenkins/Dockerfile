@@ -1,4 +1,7 @@
-FROM jenkins/jenkins:lts
+ARG JENKINS_VERSION
+
+# https://github.com/jenkinsci/docker
+FROM jenkins/jenkins:${JENKINS_VERSION}
 USER root
 RUN apt-get update -qq \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common wget build-essential bzip2 

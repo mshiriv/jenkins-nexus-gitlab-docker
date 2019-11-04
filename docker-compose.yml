@@ -1,35 +1,37 @@
 version: '2'
 services:
   nexus:
-    image: sonatype/nexus3
-    container_name: sonatype_nexus3
-    volumes:
-      - nexus_data:/nexus-data
-    restart: always
-
+  build:
+    context: nexus/
+    args:
+    NEXUS_VERSION: $NEXUS_VERSION
+  volumes:
+  - nexus_data:/nexus-data
+  restart: always
 
   jenkins:
-    image: jenkins:latest
     build:
-      context: ./
-      dockerfile: Dockerfile
-    container_name: jenkins
+      context: jenkins/
+      args:
+      JENKINS_VERSION: $JENKINS_VERSION
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - jenkins_data:/var/jenkins_home
     restart: always
-    
 
   nginx:
-    image: nginx
+    build:
+      context: nginx/
+      args:
+      NGINX_VERSION: $NGINX_VERSION
     ports:
      - '80:80'
      - '443:443'
     volumes:
-      - ./nginx/jenkins.conf:/etc/nginx/conf.d/jenkins.conf:ro
-      - ./nginx/nexus.conf:/etc/nginx/conf.d/nexus.conf:ro
-      - ./nginx/gitlab.conf:/etc/nginx/conf.d/gitlab.conf:ro
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx/jenkins.conf:/etc/nginx/conf.d/jenkins.conf:ro
+      - nginx/nexus.conf:/etc/nginx/conf.d/nexus.conf:ro
+      - nginx/gitlab.conf:/etc/nginx/conf.d/gitlab.conf:ro
+      - nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     container_name: nginx
     depends_on:
       - jenkins
@@ -37,19 +39,23 @@ services:
       - gitlab
     restart: always 
 
-
   redis:
+    build:
+      context: redis/
+      args:
+      REDIS_VERSION: $REDIS_VERSION
     restart: always
-    image: sameersbn/redis:4.0.9-2
     command:
     - --loglevel warning
     volumes:
     - redis-data:/var/lib/redis:Z
 
-
   postgresql:
+    build:
+      context: postgresql/
+      args:
+      POSTGRESQL_VERSION: $POSTGRESQL_VERSION
     restart: always
-    image: sameersbn/postgresql:10-2
     volumes:
     - postgresql-data:/var/lib/postgresql:Z
     environment:
@@ -58,10 +64,11 @@ services:
     - DB_NAME=gitlabhq_production
     - DB_EXTENSION=pg_trgm
 
-
   gitlab:
-    restart: always
-    image: sameersbn/gitlab:12.4.0
+    build:
+      context: gitlab/
+      args:
+      POSTGRESQL_VERSION: $GITLAB_VERSION
     depends_on:
     - redis
     - postgresql
@@ -189,11 +196,10 @@ services:
     - OAUTH_AZURE_API_SECRET=
     - OAUTH_AZURE_TENANT_ID=
 
-
 volumes:
-  nexus_data:
-  jenkins_data:
-  redis-data:
-  postgresql-data:
-  gitlab-data:
+  nexus_data: {}
+  jenkins_data: {}
+  redis-data: {}
+  postgresql-data: {}
+  gitlab-data: {}
 
