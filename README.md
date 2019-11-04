@@ -9,6 +9,21 @@ Based on the official Docker images from Jenkins and Nexus :
 
 Also GitLab based on [Dockerized GitLab](https://github.com/sameersbn/docker-gitlab).
 
+## Contents
+
+1. [Requirements](#requirements)
+   * [Host setup](#host-setup)
+
+
+
+## Requirements
+
+### Host setup
+
+* [Docker Engine](https://docs.docker.com/install/) version **17.05+**
+* [Docker Compose](https://docs.docker.com/compose/install/) version **1.12.0+**
+* 1.5 GB of RAM
+
 
 # Services Architecture
 ![picture](./services_architecture.jpg)
