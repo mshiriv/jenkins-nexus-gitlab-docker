@@ -1,63 +1,63 @@
 version: '2'
 services:
   nexus:
-  build:
-    context: nexus/
-    args:
-    NEXUS_VERSION: $NEXUS_VERSION
-  volumes:
-  - nexus_data:/nexus-data
-  restart: always
+    build:
+      context: nexus/
+      args:
+        NEXUS_VERSION: $NEXUS_VERSION
+    volumes:
+    - nexus_data:/nexus-data
+    restart: always
 
   jenkins:
     build:
       context: jenkins/
       args:
-      JENKINS_VERSION: $JENKINS_VERSION
+        JENKINS_VERSION: $JENKINS_VERSION
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - jenkins_data:/var/jenkins_home
+    - /var/run/docker.sock:/var/run/docker.sock
+    - jenkins_data:/var/jenkins_home
     restart: always
 
   nginx:
     build:
       context: nginx/
       args:
-      NGINX_VERSION: $NGINX_VERSION
+        NGINX_VERSION: $NGINX_VERSION
     ports:
-     - '80:80'
-     - '443:443'
+    - '80:80'
+    - '443:443'
     volumes:
-      - nginx/jenkins.conf:/etc/nginx/conf.d/jenkins.conf:ro
-      - nginx/nexus.conf:/etc/nginx/conf.d/nexus.conf:ro
-      - nginx/gitlab.conf:/etc/nginx/conf.d/gitlab.conf:ro
-      - nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx/jenkins.conf:/etc/nginx/conf.d/jenkins.conf:ro
+    - ./nginx/nexus.conf:/etc/nginx/conf.d/nexus.conf:ro
+    - ./nginx/gitlab.conf:/etc/nginx/conf.d/gitlab.conf:ro
+    - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     container_name: nginx
     depends_on:
-      - jenkins
-      - nexus
-      - gitlab
+    - jenkins
+    - nexus
+    - gitlab
     restart: always 
 
   redis:
     build:
       context: redis/
       args:
-      REDIS_VERSION: $REDIS_VERSION
+        REDIS_VERSION: $REDIS_VERSION
     restart: always
     command:
     - --loglevel warning
     volumes:
-    - redis-data:/var/lib/redis:Z
+    - redis_data:/var/lib/redis:Z
 
   postgresql:
     build:
       context: postgresql/
       args:
-      POSTGRESQL_VERSION: $POSTGRESQL_VERSION
+        POSTGRESQL_VERSION: $POSTGRESQL_VERSION
     restart: always
     volumes:
-    - postgresql-data:/var/lib/postgresql:Z
+    - postgresql_data:/var/lib/postgresql:Z
     environment:
     - DB_USER=gitlab
     - DB_PASS=password
@@ -68,7 +68,7 @@ services:
     build:
       context: gitlab/
       args:
-      POSTGRESQL_VERSION: $GITLAB_VERSION
+        GITLAB_VERSION: $GITLAB_VERSION
     depends_on:
     - redis
     - postgresql
@@ -76,7 +76,7 @@ services:
     - "10080:80"
     - "10022:22"
     volumes:
-    - gitlab-data:/home/git/data:Z
+    - gitlab_data:/home/git/data:Z
     environment:
     - DEBUG=false
     - DB_ADAPTER=postgresql
@@ -197,9 +197,8 @@ services:
     - OAUTH_AZURE_TENANT_ID=
 
 volumes:
-  nexus_data: {}
-  jenkins_data: {}
-  redis-data: {}
-  postgresql-data: {}
-  gitlab-data: {}
-
+  nexus_data:
+  jenkins_data:
+  redis_data:
+  postgresql_data:
+  gitlab_data:
