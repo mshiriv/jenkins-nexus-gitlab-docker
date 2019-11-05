@@ -24,6 +24,16 @@ Also GitLab based on [Dockerized GitLab](https://github.com/sameersbn/docker-git
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
 
+By default, the stack exposes the following ports:
+* 80: Nginx
+* 10022: GitLab SSH 
+
+And also you can access stack service, through docker network, following ports:
+* 80: GitLab
+* 8080: Jenkins
+* 8081: Nexus
+
+
 
 # Services Architecture
 ![picture](./services_architecture.jpg)
