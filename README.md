@@ -20,9 +20,9 @@ Also GitLab based on [Dockerized GitLab](https://github.com/sameersbn/docker-git
 
 ### Host setup
 
-* [Docker Engine](https://docs.docker.com/install/) version **17.05+**
-* [Docker Compose](https://docs.docker.com/compose/install/) version **1.12.0+**
-* 1.5 GB of RAM
+* [Docker Engine](https://docs.docker.com/install/) 
+* [Docker Compose](https://docs.docker.com/compose/install/)
+
 
 
 # Services Architecture
