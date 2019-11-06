@@ -63,6 +63,6 @@ any configuration change.
 Please refer to the following documentation page for more details about how to configure GitLab inside Docker
 containers: [Dockerized GitLab](https://github.com/sameersbn/docker-gitlab).
 ### How to configure Nginx
-Nginx route requests to services using Nginx upstearm. The Nginx default configuration is stored in [`nginx/config/nginx.conf`].
-Also you can change each service upstearm default configurtion stored in [`nginx/config/`]. For exapmle if you want change GitLab HTTP address,
-you should change `GITLAB_HOST` on docker-compose, GitLab service, and also `server_name` on [`nginx/config/gitlab.conf`]
+Nginx route requests to services using Nginx upstearm. The Nginx default configuration is stored in `nginx/config/nginx.conf`.
+Also you can change each service upstearm default configurtion stored in `nginx/config/`. For exapmle if you want change GitLab HTTP address,
+you should change `GITLAB_HOST` on docker-compose, GitLab service, and also `server_name` on `nginx/config/gitlab.conf`.
