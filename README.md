@@ -16,12 +16,13 @@ Also GitLab based on [Dockerized GitLab](https://github.com/sameersbn/docker-git
 2. [Usage](#usage)
    * [Bringing up the stack](#bringing-up-the-stack)
    * [Cleanup](#cleanup)
-
+3. [Configuration](#configuration)
+   * [How to configure GitLab](#how-to-configure-GitLab)
+   * [How to configure Nginx](#how-to-configure-Nginx)
 
 
 ## Requirements
 ### Host setup
-
 * [Docker Engine](https://docs.docker.com/install/) 
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
@@ -35,7 +36,6 @@ And also you can access stack service, through docker network, following ports:
 * 8081: Nexus
 
 # Services Architecture
-
 ![picture](./services_architecture.jpg)
 
 ## Usage
@@ -54,3 +54,15 @@ If you are starting the stack for the very first time, please read the section b
 In order to entirely shutdown the stack and remove all persisted data, use the following Docker Compose command:
 ```console
 $ docker-compose down -v
+```
+
+## Configuration
+> :information_source: Configuration is not dynamically reloaded, you will need to restart individual components after
+any configuration change.
+### How to configure GitLab
+Please refer to the following documentation page for more details about how to configure GitLab inside Docker
+containers: [Dockerized GitLab](https://github.com/sameersbn/docker-gitlab).
+### How to configure Nginx
+Nginx route requests to services using Nginx upstearm. The Nginx default configuration is stored in [`nginx/config/nginx.conf`].
+Also you can change each service upstearm default configurtion stored in [`nginx/config/`]. For exapmle if you want change GitLab HTTP address,
+you should change `GITLAB_HOST` on docker-compose, GitLab service, and also `server_name` on [`nginx/config/gitlab.conf`]
