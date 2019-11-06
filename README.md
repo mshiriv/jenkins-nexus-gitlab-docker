@@ -13,6 +13,9 @@ Also GitLab based on [Dockerized GitLab](https://github.com/sameersbn/docker-git
 
 1. [Requirements](#requirements)
    * [Host setup](#host-setup)
+2. [Usage](#usage)
+   * [Bringing up the stack](#bringing-up-the-stack)
+   * [Cleanup](#cleanup)
 
 
 
@@ -34,7 +37,30 @@ And also you can access stack service, through docker network, following ports:
 * 8081: Nexus
 
 
-
 # Services Architecture
 ![picture](./services_architecture.jpg)
 
+## Usage
+
+### Bringing up the stack
+
+Clone this repository, then start the stack using Docker Compose:
+
+```console
+$ docker-compose up
+```
+
+You can also run all services in the background (detached mode) by adding the `-d` flag to the above command.
+
+> :information_source: You must run `docker-compose build` first whenever you switch branch or update a base image.
+
+If you are starting the stack for the very first time, please read the section below attentively.
+
+### Cleanup
+
+Elasticsearch data is persisted inside a volume by default.
+
+In order to entirely shutdown the stack and remove all persisted data, use the following Docker Compose command:
+
+```console
+$ docker-compose down -v
